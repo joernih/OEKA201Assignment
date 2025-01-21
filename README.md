@@ -9,7 +9,9 @@
 
 ## Confirmation
 ### Part 1
-`<I will write my confirmed message here> `
+`<Jørn will write his confirmed message here> `
 ### Part 2
-`<I will write my confirmed message here> `
+`<Bjørnar will write his confirmed message here> `
+### Part 3
+`<Jørn will write his confirmed message here> `
 
