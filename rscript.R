@@ -1,4 +1,5 @@
 #
-print('R commands read into memory')
+
+hello <- 'hello from R!'
 
 

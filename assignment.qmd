@@ -3,14 +3,21 @@ title: "Assignment"
 bibliography: ref.bib
 ---
 
-```{r, echo=F, messages=F, warnings=F}
+
+```{r}
+#| echo=F
 source('rscript.R')
 ```
+
+`r hello`
+
 
 
 # Introduction
 
 # Abc
+
+# Def
 
 
 According to [@knuth84]
@@ -19,3 +26,6 @@ According to [@knuth84]
 # Conclusions
 
 # References
+
+
+
