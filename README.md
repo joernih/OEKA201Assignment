@@ -11,7 +11,7 @@
 ### Part 1
 `<Jørn will write his confirmed message here> `
 ### Part 2
-`<Bjørnar will write his confirmed message here> `
+`<Bjørnar/Jørn will write his confirmed message here> `
 ### Part 3
 `<Jørn will write his confirmed message here> `
 
