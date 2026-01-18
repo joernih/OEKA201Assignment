@@ -1,6 +1,5 @@
 ##############################################################################################################
 ### Functions
-library(ellmer)
 get_current_time <- function(tz = "UTC") {
   format(Sys.time(), tz = tz, usetz = TRUE)
 }
@@ -56,10 +55,15 @@ AIasst$set("public", "initialize",
 		      init=FALSE,
 		      gses=FALSE,
 		      sses=FALSE,
-		      lmodel = c("openai","groq","google_gemini","anthropic")[1], 
+		      lmodel = c("openai/gpt-4.1",
+          "groq/llama3-8b-8192",
+          "google_gemini/gemini-2.5-flash",
+          "anthropic/claude-sonnet-4-20250514",
+          "perplexity/sonar")[1], 
 		      qmd=NULL,
 		      tools=NULL,
 		      refdr="AIrep") {
+
   self$filstr[["init"]] <- init
   self$filstr[["fill"]] <- fill
   self$filstr[["fild"]] <- fild
@@ -73,7 +77,7 @@ AIasst$set("public", "initialize",
   self$lmodel <- lmodel
   self$chatobj <- ellmer::chat(lmodel,system_prompt=self$filstr$psys)
   # Load
-  if (isTRUE(grepl("\\.(qmd|md|R$)", self$filstr$fill[[1]]))) {
+  if (isTRUE(grepl("\\.(qmd|md|R|Py|bib$)", self$filstr$fill[[1]]))) {
   #if (isTRUE(grepl("filename\\..*", self$filstr$fill[[1]]))) {
     flbt <- readLines(paste0(self$filstr$fild,"/",self$filstr$fill[[1]]))
     self$filstr[["flbt"]] <- flbt
@@ -92,11 +96,13 @@ AIasst$set("public", "initialize",
        dir.create(self$filstr$filr)
      }
   } else {
+    #browser()
      obj <- paste0(self$filstr[["filn"]], c(".rds"))
      rRDS <- readRDS(obj)
      self$chatobj$set_turns(rRDS)
-     self$filstr[["gses"]] <- self$chatobj$get_turns(include_system_prompt = sypr)
      #self$filstr[["gses"]] <- self$chatobj$get_turns()
+     #self$filstr[["gses"]] <- self$chatobj$get_turns(include_system_prompt = sypr)
+     self$filstr[["gses"]] <- self$chatobj$get_turns(include_system_prompt = TRUE)
   }
 })
 ##############################################################################################################
@@ -143,7 +149,8 @@ AIint <- function(
       refdr="AIrep"
 		  )
 		  {
-  bankc <- AIasst$new(fill=fill,fild=fild,fils=fils,psys=psys,init=init,gses=gses,sses=sses,lmod=lmod,tools=tools,refdr=refdr)
+  bankc <- AIasst$new(fill=fill,fild=fild,fils=fils,psys=psys,init=init,gses=gses,
+                      sses=sses,lmod=lmod,tools=tools,refdr=refdr)
   #is.null(tools)
   if (!is.null(tools)) {
     bankc$regtool(bankc$tools)
